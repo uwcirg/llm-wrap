@@ -20,5 +20,9 @@ def chat():
     )
     return jsonify(response)
 
+@app.route('/api/go', methods=['GET'])
+def go():
+    return 'go, then!' 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
