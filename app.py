@@ -16,7 +16,7 @@ def chat():
     data = request.json
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=data['message']
+        messages=data['messages']
     )
     return jsonify(response)
 
