@@ -15,7 +15,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 def chat():
     data = request.json
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini-2024-07-18",
         messages=data['messages']
     )
     return jsonify(response)
