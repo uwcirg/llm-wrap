@@ -18,8 +18,8 @@ def chat():
         model="gpt-4o-mini-2024-07-18",
         messages=data['messages']
     )
-    # return jsonify(response.choices[0].message)
-    return response.choices[0].message
+    message_dict = response.choices[0].message.to_dict()
+    return jsonify(message_dict)
 
 @app.route('/api/go', methods=['GET'])
 def go():
