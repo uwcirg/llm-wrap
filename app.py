@@ -19,6 +19,8 @@ def chat():
         messages=data['messages']
     )
     message_dict = response.choices[0].message.to_dict()
+    message_dict['prompt_tokens'] = response.usage.prompt_tokens
+    message_dict['completion_tokens'] = response.usage.completion_tokens
     return jsonify(message_dict)
 
 @app.route('/api/go', methods=['GET'])
