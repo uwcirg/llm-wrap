@@ -28,7 +28,7 @@ def embedding():
     data = request.json
     response = client.embeddings.create(
         model="text-embedding-3-small",
-        messages=data['messages']
+        input=data
     )
     message_dict = response.data[0].to_dict()
     message_dict['prompt_tokens'] = response.usage.prompt_tokens
