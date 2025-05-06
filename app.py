@@ -26,9 +26,21 @@ def chat():
 @app.route('/api/embedding', methods=['POST'])
 def embedding():
     data = request.json
+
+    # if you're sending a single string:
+    text = data.get('input')
+    # or if you're sending multiple:
+    # texts = data.get('inputs')
+
+    if text is None:
+        return jsonify({
+            "error": "Request body must include 'input'",
+            "received": data
+            }), 400
+
     response = client.embeddings.create(
         model="text-embedding-3-small",
-        input=data
+        input=text
     )
     message_dict = response.data[0].to_dict()
     message_dict['prompt_tokens'] = response.usage.prompt_tokens
