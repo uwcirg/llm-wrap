@@ -23,6 +23,31 @@ def chat():
     message_dict['completion_tokens'] = response.usage.completion_tokens
     return jsonify(message_dict)
 
+@app.route('/api/embedding', methods=['POST'])
+def embedding():
+    data = request.json
+
+    # if you're sending a single string:
+    # text = data.get('input')
+    text = data.get('messages')
+    # or if you're sending multiple:
+    # texts = data.get('inputs')
+
+    if text is None:
+        return jsonify({
+            "error": "Request body must include 'input'",
+            "received": data
+            }), 400
+
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=text
+    )
+    message_dict = response.data[0].to_dict()
+    message_dict['prompt_tokens'] = response.usage.prompt_tokens
+    message_dict['total_tokens'] = response.usage.total_tokens
+    return jsonify(message_dict)
+
 @app.route('/api/go', methods=['GET'])
 def go():
     return 'go, then!' 
