@@ -28,7 +28,8 @@ def embedding():
     data = request.json
 
     # if you're sending a single string:
-    text = data.get('input')
+    # text = data.get('input')
+    text = data.get('messages')
     # or if you're sending multiple:
     # texts = data.get('inputs')
 
