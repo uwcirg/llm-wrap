@@ -45,7 +45,7 @@ def embedding():
     )
     message_dict = response.data[0].to_dict()
     message_dict['prompt_tokens'] = response.usage.prompt_tokens
-    message_dict['completion_tokens'] = response.usage.completion_tokens
+    message_dict['total_tokens'] = response.usage.total_tokens
     return jsonify(message_dict)
 
 @app.route('/api/go', methods=['GET'])
